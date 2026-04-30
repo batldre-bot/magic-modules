@@ -1,3 +1,13 @@
+resource "google_tags_tag_key" "tag_key1" {
+  parent     = "organizations/{{index $.Vars "org_id"}}"
+  short_name = "{{index $.Vars "key_short_name"}}"
+}
+
+resource "google_tags_tag_value" "tag_value1" {
+  parent     = google_tags_tag_key.tag_key1.id
+  short_name = "{{index $.Vars "value_short_name"}}"
+}
+
 resource "google_compute_network" "default" {
   name                    = "{{index $.Vars "workstation_cluster_name"}}"
   auto_create_subnetworks = false
@@ -34,6 +44,17 @@ resource "google_workstations_workstation_config" "{{$.PrimaryResourceId}}" {
   workstation_config_id  = "{{index $.Vars "workstation_config_name"}}"
   workstation_cluster_id = google_workstations_workstation_cluster.default.workstation_cluster_id
   location               = "us-central1"
+
+  host {
+      gce_instance {
+        machine_type                = "c3-standard-22"
+        boot_disk_size_gb           = 35
+        disable_public_ip_addresses = true
+        vm_tags = {
+          (google_tags_tag_key.tag_key1.id) = google_tags_tag_value.tag_value1.id
+        }
+      }
+    }
 
   persistent_directories {
     mount_path = "/home"
