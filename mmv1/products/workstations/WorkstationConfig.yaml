@@ -461,6 +461,7 @@ properties:
               type: String
               description: |
                 How long to wait before converting the disk into a snapshot.
+              default_from_api: true
   - name: 'ephemeralDirectories'
     type: Array
     description: |
