@@ -35,12 +35,6 @@ resource "google_workstations_workstation_config" "{{$.PrimaryResourceId}}" {
   workstation_cluster_id = google_workstations_workstation_cluster.default.workstation_cluster_id
   location               = "us-central1"
 
-  host {
-    gce_instance {
-      machine_type = "c3-standard-22"
-    }
-  }
-
   persistent_directories {
     mount_path = "/home"
     gce_hd {
