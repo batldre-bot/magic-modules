@@ -33,7 +33,6 @@ resource "google_workstations_workstation_config" "{{$.PrimaryResourceId}}" {
     mount_path = "/home"
     gce_hd {
       size_gb         = 200
-      max_size_gb     = 500
       reclaim_policy  = "DELETE"
       archive_timeout = "3600s"
     }
