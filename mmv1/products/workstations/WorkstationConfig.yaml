@@ -446,6 +446,7 @@ properties:
               type: Integer
               description: |
                 The GB capacity of a persistent home directory. Defaults to '200'.
+              default_from_api: true
             - name: 'sourceSnapshot'
               type: String
               description: |
@@ -457,6 +458,7 @@ properties:
               enum_values:
                 - 'DELETE'
                 - 'RETAIN'
+              default_from_api: true
             - name: 'archiveTimeout'
               type: String
               description: |
