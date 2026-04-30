@@ -40,6 +40,7 @@ resource "google_workstations_workstation_config" "{{$.PrimaryResourceId}}" {
     gce_hd {
       source_snapshot = google_compute_snapshot.my_source_snapshot.id
       reclaim_policy  = "DELETE"
+      archive_timeout = "3600s"
     }
   }
 }
